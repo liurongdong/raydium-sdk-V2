@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: 23
           registry-url: https://npm.pkg.github.com/
-      - run: npm i tsup
-      - run: npm run push
+      - run: npm install -g yarn
+      - run: yarn push
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
