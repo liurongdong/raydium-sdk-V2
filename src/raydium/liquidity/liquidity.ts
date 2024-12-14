@@ -1416,13 +1416,24 @@ export default class LiquidityModule extends ModuleBase {
     poolInfo: ComputeAmountOutParam["poolInfo"];
     poolKeys: AmmV4Keys | AmmV5Keys;
   }> {
+
+
+    // rpc
+    console.time("rpcData")
     const rpcData = await this.getRpcPoolInfo(poolId);
+    console.timeEnd("rpcData")
+
     const computeData = toAmmComputePoolInfo({ [poolId]: rpcData });
+
+
     const poolInfo = computeData[poolId];
+
+
     const allKeys = await this.scope.tradeV2.computePoolToPoolKeys({
       pools: [computeData[poolId]],
       ammRpcData: { [poolId]: rpcData },
     });
+
     return {
       poolRpcData: rpcData,
       poolInfo,
